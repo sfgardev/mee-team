@@ -1,13 +1,11 @@
+import { BaseResponse } from '../../../shared/model'
+
 export type SignUpRequest = {
   email: string
   lang: string
 }
 
-export type SignUpResponse = {
-  success: boolean
-  message: string
-  data: Data
-}
+export type SignUpResponse = BaseResponse<Data>
 
 type Data = {
   name: null
