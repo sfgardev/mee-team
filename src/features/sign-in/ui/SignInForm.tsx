@@ -35,7 +35,8 @@ export const SignInForm = () => {
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     try {
-      await signIn(data).unwrap()
+      const response = await signIn(data).unwrap()
+      window.localStorage.setItem('accessToken', response.data.token)
     } catch (error) {
       console.error(error)
     }
