@@ -1,5 +1,12 @@
+import { SignUpForm } from '../../features/sign-up/ui'
+import { Container } from '../../shared/ui/container'
+
 export const SignUp = () => {
   return (
-    <div>SignUp</div>
+    <section>
+      <Container>
+        <SignUpForm />
+      </Container>
+    </section>
   )
 }
