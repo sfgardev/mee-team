@@ -1,8 +1,18 @@
 .button {
   background-color: #4763e4;
   border-radius: 12px;
-  padding: .5rem 1.5rem;
+  padding: 0.5rem 1.5rem;
   border: none;
   font-size: 1rem;
   color: #fff;
+  cursor: pointer;
+  transition: background-color 0.35s;
+
+  &:hover {
+    background-color: #2f53f4;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+  }
 }
