@@ -7,6 +7,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { signUpApi } from '../api/sign-up-api'
 import { useNavigate } from 'react-router-dom'
+import { LangSchema } from '../../../shared/model'
 
 const options = [
   { value: 'en', label: 'English' },
@@ -15,16 +16,7 @@ const options = [
 
 const SignUpFormSchema = z.object({
   email: z.string().trim().email(),
-  lang: z
-    .union([z.literal('en'), z.literal('ru'), z.literal('')])
-    .superRefine((data, ctx) => {
-      if (!data) {
-        ctx.addIssue({
-          code: 'custom',
-          message: 'Required field',
-        })
-      }
-    }),
+  lang: LangSchema,
 })
 
 type FormFields = z.infer<typeof SignUpFormSchema>
