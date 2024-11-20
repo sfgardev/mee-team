@@ -7,7 +7,7 @@ import { z } from 'zod'
 import { LangSchema } from '../../../shared/model'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { signInApi } from '../api/sign-in-api'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const options = [
   { value: 'en', label: 'English' },
@@ -70,6 +70,7 @@ export const SignInForm = () => {
         errorText={errors.lang?.message}
         {...register('lang')}
       />
+      <Link className={s.link} to="/sign-up">Sign up</Link>
       <Button disabled={isLoading}>Sign in</Button>
     </form>
   )
