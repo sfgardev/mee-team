@@ -3,6 +3,7 @@ import { createApi } from '@reduxjs/toolkit/query/react'
 import { BaseResponse } from '../shared/model'
 
 export const meApi = createApi({
+  reducerPath: 'me-api',
   baseQuery: baseQueryAuth,
   keepUnusedDataFor: 0,
   endpoints: (builder) => ({

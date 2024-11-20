@@ -16,6 +16,6 @@ export const store = configureStore({
       signUpApi.middleware,
       signInApi.middleware,
       resetPasswordApi.middleware,
-      meApi.middleware
+      meApi.middleware,
     ),
 })
