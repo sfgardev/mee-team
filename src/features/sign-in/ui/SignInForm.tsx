@@ -7,6 +7,7 @@ import { z } from 'zod'
 import { LangSchema } from '../../../shared/model'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { signInApi } from '../api/sign-in-api'
+import { useNavigate } from 'react-router-dom'
 
 const options = [
   { value: 'en', label: 'English' },
@@ -15,16 +16,21 @@ const options = [
 
 const SignInFormSchema = z.object({
   email: z.string().trim().email(),
-  password: z.string(),
+  password: z.string().min(1, { message: 'Required field' }),
   lang: LangSchema,
 })
 
 type FormFields = z.infer<typeof SignInFormSchema>
 
 export const SignInForm = () => {
+  const navigate = useNavigate()
   const [signIn, { isLoading }] = signInApi.useSignInMutation()
 
-  const { register, handleSubmit } = useForm<FormFields>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormFields>({
     defaultValues: {
       email: '',
       password: '',
@@ -37,6 +43,7 @@ export const SignInForm = () => {
     try {
       const response = await signIn(data).unwrap()
       window.localStorage.setItem('accessToken', response.data.token)
+      navigate('/users')
     } catch (error) {
       console.error(error)
     }
@@ -45,20 +52,22 @@ export const SignInForm = () => {
   return (
     <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
       <Input
-        type="email"
         placeholder="Enter email..."
         label="Email"
+        errorText={errors.email?.message}
         {...register('email')}
       />
       <Input
         type="password"
         placeholder="Enter password..."
         label="Password"
+        errorText={errors.password?.message}
         {...register('password')}
       />
       <Select
         placeholder="Select language"
         options={options}
+        errorText={errors.lang?.message}
         {...register('lang')}
       />
       <Button disabled={isLoading}>Sign in</Button>

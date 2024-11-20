@@ -18,7 +18,11 @@ export const ResetPasswordForm = () => {
   const [resetPassword, { isLoading }] =
     resetPasswordApi.useResetPasswordMutation()
 
-  const { register, handleSubmit } = useForm<FormFields>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormFields>({
     defaultValues: {
       email: '',
     },
@@ -40,6 +44,7 @@ export const ResetPasswordForm = () => {
         type="email"
         placeholder="Enter email..."
         label="Email"
+        errorText={errors.email?.message}
         {...register('email')}
       />
       <Button disabled={isLoading}>Reset</Button>

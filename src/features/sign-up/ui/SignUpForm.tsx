@@ -25,7 +25,11 @@ export const SignUpForm = () => {
   const [signUp, { isLoading }] = signUpApi.useSignUpMutation()
   const navigate = useNavigate()
 
-  const { register, handleSubmit } = useForm<FormFields>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormFields>({
     defaultValues: {
       email: '',
       lang: '',
@@ -45,14 +49,15 @@ export const SignUpForm = () => {
   return (
     <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
       <Input
-        type="email"
         placeholder="Enter email..."
         label="Email"
+        errorText={errors.email?.message}
         {...register('email')}
       />
       <Select
         placeholder="Select language"
         options={options}
+        errorText={errors.lang?.message}
         {...register('lang')}
       />
       <Button disabled={isLoading}>Sign up</Button>
