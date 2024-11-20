@@ -3,7 +3,7 @@ import App from './App'
 import { SignUp } from '../pages/sign-up'
 import { SignIn } from '../pages/sign-in'
 import { ResetPassword } from '../pages/reset-password'
-import { Users } from '../pages/users'
+import { Employees } from '../pages/employees'
 import { ProtectedRoute } from './ProtectedRoute'
 import { PublicRoute } from './PublicRoute'
 
@@ -38,10 +38,10 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: '/users',
+        path: '/employees',
         element: (
           <ProtectedRoute>
-            <Users />
+            <Employees />
           </ProtectedRoute>
         ),
       },

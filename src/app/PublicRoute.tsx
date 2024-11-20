@@ -7,7 +7,7 @@ export const PublicRoute = ({ children }: PropsWithChildren) => {
 
   if (isLoading) return <div>Loading...</div>
 
-  if (isSuccess) return <Navigate to="/users" />
+  if (isSuccess) return <Navigate to="/employees" />
 
   return children
 }

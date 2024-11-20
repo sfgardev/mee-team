@@ -43,7 +43,7 @@ export const SignInForm = () => {
     try {
       const response = await signIn(data).unwrap()
       window.localStorage.setItem('accessToken', response.data.token)
-      navigate('/users')
+      navigate('/employees')
     } catch (error) {
       console.error(error)
     }
