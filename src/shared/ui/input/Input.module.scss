@@ -22,4 +22,14 @@
       border-color: #5c73db;
     }
   }
+
+  .errorText {
+    color: #d64040;
+  }
+}
+
+.wrapper.error {
+  input {
+    border-color: #d64040;
+  }
 }

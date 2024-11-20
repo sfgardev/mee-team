@@ -1,13 +1,29 @@
-.select {
-  width: 100%;
-  padding: 0.5rem 1rem;
-  font-size: 0.875rem;
-  line-height: 1.21;
-  border-radius: 12px;
-  border: 1px solid #e4e4e7;
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 
-  &:focus {
-    outline: none;
-    border-color: #5c73db;
+  select {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    line-height: 1.21;
+    border-radius: 12px;
+    border: 1px solid #e4e4e7;
+
+    &:focus {
+      outline: none;
+      border-color: #5c73db;
+    }
+  }
+
+  .errorText {
+    color: #d64040;
+  }
+}
+
+.wrapper.error {
+  select {
+    border-color: #d64040;
   }
 }
