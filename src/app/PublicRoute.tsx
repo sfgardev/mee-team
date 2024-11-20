@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react'
 import { Navigate } from 'react-router-dom'
-import { meApi } from './me-api'
+import { meApi } from '../shared/api/me-api'
 
 export const PublicRoute = ({ children }: PropsWithChildren) => {
   const { isLoading, isSuccess } = meApi.useMeQuery()

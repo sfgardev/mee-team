@@ -1,13 +1,13 @@
-import { baseQueryAuth } from '../shared/api'
+import { baseQueryAuth } from '.'
 import { createApi } from '@reduxjs/toolkit/query/react'
-import { BaseResponse } from '../shared/model'
+import { BaseResponse } from '../model'
 
 export const meApi = createApi({
   reducerPath: 'me-api',
   baseQuery: baseQueryAuth,
   keepUnusedDataFor: 0,
   endpoints: (builder) => ({
-    me: builder.query<BaseResponse<object>, void>({
+    me: builder.query<BaseResponse<{ current_portal_id: number }>, void>({
       query: () => ({ url: 'me' }),
     }),
   }),
