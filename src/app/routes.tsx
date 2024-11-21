@@ -6,12 +6,13 @@ import { ResetPassword } from '../pages/reset-password'
 import { Employees } from '../pages/employees'
 import { ProtectedRoute } from './ProtectedRoute'
 import { PublicRoute } from './PublicRoute'
+import { PageNotFound } from '../pages/page-not-found'
 
 export const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
-    errorElement: 'Page not found',
+    errorElement: <PageNotFound />,
     children: [
       {
         index: true,
