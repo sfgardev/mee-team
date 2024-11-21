@@ -40,7 +40,7 @@ export const SignUpForm = () => {
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     try {
       await signUp(data).unwrap()
-      navigate('/sign-in')
+      navigate('/')
     } catch (error) {
       console.error(error)
     }
