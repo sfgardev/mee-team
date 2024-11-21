@@ -6,6 +6,7 @@ import { EmployeeEditFormFields } from '../model/types'
 import { employeesApi } from '../api/employees-api'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { EmployeeEditFormSchema } from '../model/schemas'
+import { useNotificationContext } from '../../../app/NotificationProvider'
 
 type Props = {
   employee: EmployeeEditFormFields | null
@@ -16,6 +17,8 @@ type Props = {
 export const EmployeeEditForm = ({ employee, portalId, onClose }: Props) => {
   const [updateEmployee, { isLoading }] =
     employeesApi.useUpdateEmployeeMutation()
+  const { openErrorNotification, openSuccessNotification } =
+    useNotificationContext()
 
   const {
     register,
@@ -36,7 +39,7 @@ export const EmployeeEditForm = ({ employee, portalId, onClose }: Props) => {
   const onSubmit: SubmitHandler<EmployeeEditFormFields> = async (data) => {
     try {
       const { firstName, lastName, email, phone, employeeId, local } = data
-      await updateEmployee({
+      const response = await updateEmployee({
         portalId,
         employeeId,
         body: {
@@ -49,8 +52,10 @@ export const EmployeeEditForm = ({ employee, portalId, onClose }: Props) => {
         },
       }).unwrap()
       onClose()
+      openSuccessNotification(response.message)
     } catch (error) {
       console.error(error)
+      openErrorNotification(error)
     }
   }
 

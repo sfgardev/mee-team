@@ -8,6 +8,7 @@ import { LangSchema } from '../../../shared/model'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { signInApi } from '../api/sign-in-api'
 import { Link, useNavigate } from 'react-router-dom'
+import { useNotificationContext } from '../../../app/NotificationProvider'
 
 const options = [
   { value: 'en', label: 'English' },
@@ -23,8 +24,11 @@ const SignInFormSchema = z.object({
 type FormFields = z.infer<typeof SignInFormSchema>
 
 export const SignInForm = () => {
-  const navigate = useNavigate()
+  const { openSuccessNotification, openErrorNotification } =
+    useNotificationContext()
+
   const [signIn, { isLoading }] = signInApi.useSignInMutation()
+  const navigate = useNavigate()
 
   const {
     register,
@@ -44,8 +48,10 @@ export const SignInForm = () => {
       const response = await signIn(data).unwrap()
       window.localStorage.setItem('accessToken', response.data.token)
       navigate('/employees')
+      openSuccessNotification(response.message)
     } catch (error) {
       console.error(error)
+      openErrorNotification(error)
     }
   }
 
@@ -70,7 +76,9 @@ export const SignInForm = () => {
         errorText={errors.lang?.message}
         {...register('lang')}
       />
-      <Link className={s.link} to="/sign-up">Sign up</Link>
+      <Link className={s.link} to="/sign-up">
+        Sign up
+      </Link>
       <Button disabled={isLoading}>Sign in</Button>
     </form>
   )

@@ -8,6 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { signUpApi } from '../api/sign-up-api'
 import { useNavigate } from 'react-router-dom'
 import { LangSchema } from '../../../shared/model'
+import { useNotificationContext } from '../../../app/NotificationProvider'
 
 const options = [
   { value: 'en', label: 'English' },
@@ -22,6 +23,8 @@ const SignUpFormSchema = z.object({
 type FormFields = z.infer<typeof SignUpFormSchema>
 
 export const SignUpForm = () => {
+  const { openSuccessNotification, openErrorNotification } =
+    useNotificationContext()
   const [signUp, { isLoading }] = signUpApi.useSignUpMutation()
   const navigate = useNavigate()
 
@@ -39,10 +42,12 @@ export const SignUpForm = () => {
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     try {
-      await signUp(data).unwrap()
+      const response = await signUp(data).unwrap()
       navigate('/')
+      openSuccessNotification(response.message)
     } catch (error) {
       console.error(error)
+      openErrorNotification(error)
     }
   }
 
