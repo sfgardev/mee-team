@@ -6,6 +6,12 @@ export type GetEmployeesRequest = {
   type?: string
 }
 
+export type UpdateEmployeeRequest = {
+  portalId: number
+  employeeId: number
+  body: Partial<UpdateEmployeeBody>
+}
+
 export type GetEmployeesResponse = BaseResponse<Data[]>
 
 export type Data = {
@@ -61,3 +67,25 @@ export type RoleType = {
 }
 
 export type EmployeeEditFormFields = z.infer<typeof EmployeeEditFormSchema>
+
+export type UpdateEmployeeBody = {
+  portal_id: number
+  portal_groups: number[]
+  portal_department: number
+  department_position: number
+  local: string
+  name_first: string
+  name_last: string
+  name_patronymic: string
+  phone_work: string
+  phone_work_whatsapp: boolean
+  phone_work_telegram: boolean
+  phone_work_viber: boolean
+  phone_internal: string
+  email_work: string
+  telegram_name: string
+  date_of_birth: string
+  city: string
+  country: number
+  date_of_employment: string
+}

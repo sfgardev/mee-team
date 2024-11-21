@@ -1,4 +1,4 @@
-import { Modal, Table } from 'antd'
+import { Modal, Spin, Table } from 'antd'
 import { meApi } from '../../../shared/api'
 import { employeesApi } from '../api/employees-api'
 import { useState } from 'react'
@@ -10,8 +10,9 @@ export const EmployeesList = () => {
   const [employee, setEmployee] = useState<EmployeeEditFormFields | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const { data } = meApi.useMeQuery()
+  const portalId = data?.data.current_portal_id as number
   const { data: employees, isLoading } = employeesApi.useGetEmployeesQuery({
-    portalId: data?.data.current_portal_id as number,
+    portalId,
   })
 
   const openModal = (employee: EmployeeEditFormFields) => {
@@ -21,7 +22,7 @@ export const EmployeesList = () => {
   const closeModal = () => setIsModalOpen(false)
   const columns = createColumns(openModal)
 
-  if (isLoading) return <div>Loading...</div>
+  if (isLoading) return <Spin fullscreen />
 
   return (
     <>
@@ -38,7 +39,11 @@ export const EmployeesList = () => {
         onCancel={closeModal}
         destroyOnClose
       >
-        <EmployeeEditForm employee={employee} onCancel={closeModal} />
+        <EmployeeEditForm
+          employee={employee}
+          portalId={portalId}
+          onClose={closeModal}
+        />
       </Modal>
     </>
   )

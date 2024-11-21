@@ -25,7 +25,7 @@ export const createColumns = (
     },
     {
       title: 'Phone',
-      dataIndex: ['profile', 'personal_phone'],
+      dataIndex: ['profile', 'work_phone'],
       key: 'personal_phone',
       render: (phone) => phone ?? '-',
     },
@@ -33,16 +33,24 @@ export const createColumns = (
       title: 'Actions',
       key: 'action',
       render: (_, record) => {
-        const { personal_email, first_name, last_name, mobile_phone } =
-          record.profile
+        const {
+          employee_id,
+          personal_email,
+          first_name,
+          last_name,
+          work_phone,
+          locale,
+        } = record.profile
         return (
           <Button
             onClick={() =>
               openModal({
+                employeeId: employee_id,
                 email: personal_email,
                 firstName: first_name ?? '',
                 lastName: last_name ?? '',
-                phone: mobile_phone ?? '',
+                phone: work_phone ?? '',
+                local: locale ?? '',
               })
             }
             sx={{ fontSize: '0.875rem', padding: '.1rem .5rem' }}

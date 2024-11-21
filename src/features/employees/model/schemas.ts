@@ -5,4 +5,7 @@ export const EmployeeEditFormSchema = z.object({
   lastName: z.string().trim(),
   email: z.string().trim().email(),
   phone: z.string().trim(),
+
+  local: z.string(),
+  employeeId: z.number(),
 })

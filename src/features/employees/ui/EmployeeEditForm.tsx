@@ -1,33 +1,57 @@
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { Input } from '../../../shared/ui/input'
 import s from './EmployeeEditForm.module.scss'
-import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from '../../../shared/ui/button'
 import { EmployeeEditFormFields } from '../model/types'
+import { employeesApi } from '../api/employees-api'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { EmployeeEditFormSchema } from '../model/schemas'
 
 type Props = {
   employee: EmployeeEditFormFields | null
-  onCancel: () => void
+  portalId: number
+  onClose: () => void
 }
 
-export const EmployeeEditForm = ({ employee, onCancel }: Props) => {
+export const EmployeeEditForm = ({ employee, portalId, onClose }: Props) => {
+  const [updateEmployee, { isLoading }] =
+    employeesApi.useUpdateEmployeeMutation()
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<EmployeeEditFormFields>({
-    values: {
+    defaultValues: {
+      employeeId: employee?.employeeId,
       firstName: employee?.firstName ?? '',
       lastName: employee?.lastName ?? '',
       email: employee?.email ?? '',
       phone: employee?.phone ?? '',
+      local: employee?.local,
     },
     resolver: zodResolver(EmployeeEditFormSchema),
   })
 
   const onSubmit: SubmitHandler<EmployeeEditFormFields> = async (data) => {
-    console.log(data)
+    try {
+      const { firstName, lastName, email, phone, employeeId, local } = data
+      await updateEmployee({
+        portalId,
+        employeeId,
+        body: {
+          portal_id: portalId,
+          name_first: firstName,
+          name_last: lastName,
+          email_work: email,
+          phone_work: phone,
+          local,
+        },
+      }).unwrap()
+      onClose()
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   return (
@@ -57,10 +81,10 @@ export const EmployeeEditForm = ({ employee, onCancel }: Props) => {
         {...register('phone')}
       />
       <div className={s.actions}>
-        <Button onClick={onCancel} className={s.cancelBtn} type="button">
+        <Button onClick={onClose} className={s.cancelBtn} type="button">
           Cancel
         </Button>
-        <Button>Save</Button>
+        <Button disabled={isLoading}>Save</Button>
       </div>
     </form>
   )
