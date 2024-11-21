@@ -5,7 +5,7 @@ import { RouterProvider } from 'react-router-dom'
 import { router } from './routes.tsx'
 import { Provider } from 'react-redux'
 import { store } from './store.ts'
-import { NotificationProvider } from './NotificationProvider.tsx'
+import { NotificationProvider } from '../shared/providers'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

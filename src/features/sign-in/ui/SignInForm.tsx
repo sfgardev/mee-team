@@ -8,7 +8,7 @@ import { LangSchema } from '../../../shared/model'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { signInApi } from '../api/sign-in-api'
 import { Link, useNavigate } from 'react-router-dom'
-import { useNotificationContext } from '../../../app/NotificationProvider'
+import { useNotificationContext } from '../../../shared/providers'
 
 const options = [
   { value: 'en', label: 'English' },

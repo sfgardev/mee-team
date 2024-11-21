@@ -6,7 +6,7 @@ import { EmployeeEditFormFields } from '../model/types'
 import { employeesApi } from '../api/employees-api'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { EmployeeEditFormSchema } from '../model/schemas'
-import { useNotificationContext } from '../../../app/NotificationProvider'
+import { useNotificationContext } from '../../../shared/providers'
 
 type Props = {
   employee: EmployeeEditFormFields | null

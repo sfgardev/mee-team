@@ -1,12 +1,12 @@
 import { notification } from 'antd'
 import {
-    createContext,
-    PropsWithChildren,
-    useCallback,
-    useContext,
-    useMemo,
+  createContext,
+  PropsWithChildren,
+  useCallback,
+  useContext,
+  useMemo,
 } from 'react'
-import { isApiError } from '../shared/api'
+import { isApiError } from '../api'
 
 type NotificationContext = {
   openSuccessNotification: (description: string) => void
