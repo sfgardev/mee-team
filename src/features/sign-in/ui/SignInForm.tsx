@@ -76,9 +76,14 @@ export const SignInForm = () => {
         errorText={errors.lang?.message}
         {...register('lang')}
       />
-      <Link className={s.link} to="/sign-up">
-        Sign up
-      </Link>
+      <div className={s.links}>
+        <Link className={s.link} to="/reset-password">
+          Reset password
+        </Link>
+        <Link className={s.link} to="/sign-up">
+          Sign up
+        </Link>
+      </div>
       <Button disabled={isLoading}>Sign in</Button>
     </form>
   )
