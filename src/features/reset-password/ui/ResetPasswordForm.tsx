@@ -6,6 +6,7 @@ import s from './ResetPassword.module.scss'
 import { Button } from '../../../shared/ui/button'
 import { resetPasswordApi } from '../api/reset-password-api'
 import { useNavigate } from 'react-router-dom'
+import { useNotificationContext } from '../../../shared/providers'
 
 const ResetPaswordFormSchema = z.object({
   email: z.string().trim().email(),
@@ -14,6 +15,8 @@ const ResetPaswordFormSchema = z.object({
 type FormFields = z.infer<typeof ResetPaswordFormSchema>
 
 export const ResetPasswordForm = () => {
+  const { openSuccessNotification, openErrorNotification } =
+    useNotificationContext()
   const navigate = useNavigate()
   const [resetPassword, { isLoading }] =
     resetPasswordApi.useResetPasswordMutation()
@@ -31,17 +34,18 @@ export const ResetPasswordForm = () => {
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     try {
-      await resetPassword(data).unwrap()
-      navigate('/sign-in')
+      const response = await resetPassword(data).unwrap()
+      navigate('/')
+      openSuccessNotification(response.message)
     } catch (error) {
       console.error(error)
+      openErrorNotification(error)
     }
   }
 
   return (
     <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
       <Input
-        type="email"
         placeholder="Enter email..."
         label="Email"
         errorText={errors.email?.message}
