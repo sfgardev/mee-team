@@ -11,9 +11,12 @@ export const EmployeesList = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const { data } = meApi.useMeQuery()
   const portalId = data?.data.current_portal_id as number
-  const { data: employees, isLoading } = employeesApi.useGetEmployeesQuery({
-    portalId,
-  })
+  const { data: employees, isLoading } = employeesApi.useGetEmployeesQuery(
+    {
+      portalId,
+    },
+    { skip: !portalId }
+  )
 
   const openModal = (employee: EmployeeEditFormFields) => {
     setIsModalOpen(true)
