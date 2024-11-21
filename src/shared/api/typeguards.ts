@@ -9,6 +9,7 @@ export const isApiError = (error: unknown): error is ApiError => {
     isObject(error) &&
     'data' in error &&
     isObject(error.data) &&
-    'errors' in error.data
+    'success' in error.data &&
+    error.data.success === false
   )
 }
