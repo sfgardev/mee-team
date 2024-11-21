@@ -9,16 +9,15 @@ import { useNotificationContext } from '../../providers'
 export const Header = () => {
   const { isSuccess } = meApi.useMeQuery()
   const [logout, { isLoading }] = logoutApi.useLogoutMutation()
-  const { openSuccessNotification, openErrorNotification } =
-    useNotificationContext()
+  const { openErrorNotification } = useNotificationContext()
 
   const handleLogout = async () => {
     try {
-      const response = await logout().unwrap()
+      await logout().unwrap()
       window.localStorage.removeItem('accessToken')
-      openSuccessNotification(response.message)
       window.location.href = '/'
     } catch (error) {
+      console.error(error)
       openErrorNotification(error)
     }
   }
