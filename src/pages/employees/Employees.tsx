@@ -1,7 +1,7 @@
 import { EmployeesList } from '../../features/employees/ui'
 import { Container } from '../../shared/ui/container'
 
-export const Employees = () => {
+const Employees = () => {
   return (
     <section>
       <Container>
@@ -10,3 +10,5 @@ export const Employees = () => {
     </section>
   )
 }
+
+export default Employees

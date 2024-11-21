@@ -3,7 +3,7 @@ import { Button } from '../../shared/ui/button'
 import { Container } from '../../shared/ui/container'
 import s from './PageNotFound.module.scss'
 
-export const PageNotFound = () => {
+const PageNotFound = () => {
   const navigate = useNavigate()
 
   return (
@@ -17,3 +17,5 @@ export const PageNotFound = () => {
     </section>
   )
 }
+
+export default PageNotFound

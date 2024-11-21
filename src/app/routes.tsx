@@ -1,12 +1,15 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createBrowserRouter } from 'react-router-dom'
 import App from './App'
-import { SignUp } from '../pages/sign-up'
-import { SignIn } from '../pages/sign-in'
-import { ResetPassword } from '../pages/reset-password'
-import { Employees } from '../pages/employees'
 import { ProtectedRoute } from './ProtectedRoute'
 import { PublicRoute } from './PublicRoute'
-import { PageNotFound } from '../pages/page-not-found'
+import { lazy } from 'react'
+
+const SignUp = lazy(() => import('../pages/sign-up'))
+const SignIn = lazy(() => import('../pages/sign-in'))
+const ResetPassword = lazy(() => import('../pages/reset-password'))
+const Employees = lazy(() => import('../pages/employees'))
+const PageNotFound = lazy(() => import('../pages/page-not-found'))
 
 export const router = createBrowserRouter([
   {

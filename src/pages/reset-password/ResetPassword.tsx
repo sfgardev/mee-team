@@ -1,7 +1,7 @@
 import { ResetPasswordForm } from '../../features/reset-password/ui'
 import { Container } from '../../shared/ui/container'
 
-export const ResetPassword = () => {
+const ResetPassword = () => {
   return (
     <section>
       <Container>
@@ -10,3 +10,5 @@ export const ResetPassword = () => {
     </section>
   )
 }
+
+export default ResetPassword

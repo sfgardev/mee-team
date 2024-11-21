@@ -1,7 +1,7 @@
 import { SignUpForm } from '../../features/sign-up/ui'
 import { Container } from '../../shared/ui/container'
 
-export const SignUp = () => {
+const SignUp = () => {
   return (
     <section>
       <Container>
@@ -10,3 +10,5 @@ export const SignUp = () => {
     </section>
   )
 }
+
+export default SignUp
