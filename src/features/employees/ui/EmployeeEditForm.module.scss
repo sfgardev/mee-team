@@ -1,9 +1,8 @@
+@use '../../../shared/styles/mixins';
+@use '../../../shared/styles/variables';
+
 .form {
-  max-width: 32rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin: 0 auto;
+  @include mixins.form;
 }
 
 .actions {
@@ -15,11 +14,11 @@
 .cancelBtn {
   justify-self: flex-end;
   background-color: transparent;
-  color: #4763e4;
-  border-color: #4763e4;
+  color: variables.$primary-color;
+  border-color: variables.$primary-color;
 
   &:hover {
-    color: #2f53f4;
+    color: variables.$btn-hover;
     background-color: transparent;
   }
 }

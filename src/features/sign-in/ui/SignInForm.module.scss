@@ -1,13 +1,12 @@
+@use '../../../shared/styles/mixins';
+@use '../../../shared/styles/variables';
+
 .form {
-  max-width: 32rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin: 0 auto;
+  @include mixins.form;
 }
 
 .link {
   text-align: right;
   text-decoration: none;
-  color: #4763e4;
+  color: variables.$primary-color;
 }

@@ -1,5 +1,7 @@
+@use '../../../shared/styles/variables';
+
 .button {
-  background-color: #4763e4;
+  background-color: variables.$primary-color;
   border-radius: 12px;
   padding: 0.5rem 1.5rem;
   border: 1px solid transparent;
@@ -9,7 +11,7 @@
   transition: background-color 0.35s;
 
   &:hover {
-    background-color: #2f53f4;
+    background-color: variables.$btn-hover;
   }
 
   &:disabled {
