@@ -1,4 +1,6 @@
+import { z } from 'zod'
 import { BaseResponse } from './../../../shared/model/base-response-type'
+import { EmployeeEditFormSchema } from './schemas'
 export type GetEmployeesRequest = {
   portalId: number
   type?: string
@@ -57,3 +59,5 @@ export type RoleType = {
   integrator: boolean
   administrator: boolean
 }
+
+export type EmployeeEditFormFields = z.infer<typeof EmployeeEditFormSchema>

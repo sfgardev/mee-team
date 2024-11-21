@@ -1,7 +1,10 @@
 import { Button } from '../../../shared/ui/button/Button'
 import { TableProps } from 'antd'
+import { Data, EmployeeEditFormFields } from './types'
 
-export const createColumns = (openModal: () => void): TableProps['columns'] => {
+export const createColumns = (
+  openModal: (employee: EmployeeEditFormFields) => void
+): TableProps<Data>['columns'] => {
   return [
     {
       title: 'First name',
@@ -30,10 +33,18 @@ export const createColumns = (openModal: () => void): TableProps['columns'] => {
       title: 'Actions',
       key: 'action',
       render: (_, record) => {
-        console.log(record)
+        const { personal_email, first_name, last_name, mobile_phone } =
+          record.profile
         return (
           <Button
-            onClick={openModal}
+            onClick={() =>
+              openModal({
+                email: personal_email,
+                firstName: first_name ?? '',
+                lastName: last_name ?? '',
+                phone: mobile_phone ?? '',
+              })
+            }
             sx={{ fontSize: '0.875rem', padding: '.1rem .5rem' }}
           >
             Edit
